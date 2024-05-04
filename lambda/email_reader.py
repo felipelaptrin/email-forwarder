@@ -63,6 +63,7 @@ class EmailReader:
 
         for email_id in emails_to_read_ids:
             _, msg_data = imap.fetch(email_id, '(RFC822)')
+            imap.store(email_id, '-FLAGS', '\\Seen') # Mark as unread
 
             for response_part in msg_data:
                 if isinstance(response_part, tuple):
