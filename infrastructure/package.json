@@ -1,0 +1,39 @@
+{
+  "name": "email-forwarder",
+  "version": "1.0.0",
+  "license": "UNLICENSED",
+  "scripts": {
+    "deploy": "cdk deploy",
+    "diff": "cdk diff",
+    "synth": "cdk synth",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "prettier": "prettier --check src/",
+    "prettier:fix": "prettier --write src/"
+  },
+  "dependencies": {
+    "aws-cdk": "^2.139.0",
+    "aws-cdk-lib": "^2.139.0",
+    "constructs": "^10.3.0",
+    "source-map-support": "^0.5.21",
+    "ts-node": "^10.9.2"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20.12.7",
+    "eslint": "^9.1.1",
+    "prettier": "^3.2.5",
+    "ts-jest": "^29.1.2",
+    "typescript": "^5.4.5",
+    "typescript-eslint": "^7.7.1"
+  },
+  "prettier": {
+    "printWidth": 120
+  },
+  "engines": {
+    "npm": "please-use-yarn",
+    "node": ">=18",
+    "yarn": "~1.22.0 <2"
+  }
+}
