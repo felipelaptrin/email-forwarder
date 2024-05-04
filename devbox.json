@@ -1,0 +1,21 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.10.5/.schema/devbox.schema.json",
+  "packages": [
+    "python@3.11.9",
+    "python311Packages.pip@24.0",
+    "nodejs@20.12.2",
+    "yarn@1.22.22"
+  ],
+  "env": {
+    "LOCAL_DEVELOPMENT": "TRUE"
+  },
+  "shell": {
+    "scripts": {
+      "init": [
+        "python -m venv venv",
+        "source venv/bin/activate",
+        "pip install -r lambda/requirements.txt"
+      ]
+    }
+  }
+}
