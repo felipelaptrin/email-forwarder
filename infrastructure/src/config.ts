@@ -19,7 +19,7 @@ export const config: InfraConfig = {
   lambda: {
     timeoutInSeconds: 30,
     memoryInMiB: 256,
-    triggerRateInMinutes: 1,
+    triggerRateInMinutes: 5,
     architecture: Architecture.ARM_64, // This must match your architecture (since we are building during deployment)
   },
 };
