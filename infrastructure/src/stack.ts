@@ -8,6 +8,7 @@ import { Rule, RuleTargetInput, Schedule } from "aws-cdk-lib/aws-events";
 import { LambdaFunction } from "aws-cdk-lib/aws-events-targets";
 import { Topic } from "aws-cdk-lib/aws-sns";
 import { EmailSubscription } from "aws-cdk-lib/aws-sns-subscriptions";
+import { RetentionDays } from "aws-cdk-lib/aws-logs";
 
 export class EmailForwarderStack extends Stack {
   constructor(scope: Construct, id: string, config: InfraConfig, props?: StackProps) {
@@ -30,6 +31,7 @@ export class EmailForwarderStack extends Stack {
       memorySize: config.lambda.memoryInMiB,
       deadLetterTopic: topic,
       architecture: config.lambda.architecture,
+      logRetention: RetentionDays.ONE_WEEK
     });
     topic.grantPublish(lambda);
 

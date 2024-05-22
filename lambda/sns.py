@@ -5,13 +5,19 @@ from envs import AWS_REGION, SNS_TOPIC_ARN
 sns = boto3.client('sns', region_name=AWS_REGION)
 
 class SNS:
-    def send_message(email: Email, original_email: str) -> None:
+    def __init__(self):
+        self.AWS_MAX_SIZE_SUBJECT = 100  # Subjects must be UTF-8 text with no line breaks or control characters, and less than 100 characters long.
+
+    def send_message(self, email: Email, original_email: str) -> None:
         try:
+            subject = f"[{email.sender}] {email.title}"[0:self.AWS_MAX_SIZE_SUBJECT]
             sns.publish(
                 TargetArn=SNS_TOPIC_ARN,
-                Subject=f"[{email.sender}] {email.title}",
+                Subject=subject,
                 Message=f"Check email content in the {original_email} email."
             )
 
         except Exception as e:
-            print(f'Error publish message to topic: {str(e)}')
+            msg = f'Error publish message to topic: {str(e)}'
+            print(msg)
+            raise Exception(msg)

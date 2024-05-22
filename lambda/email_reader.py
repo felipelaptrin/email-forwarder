@@ -3,6 +3,7 @@ import imaplib
 from dataclasses import dataclass
 from typing import List
 
+import chardet
 from ssm import ParameterStore
 
 imap = imaplib.IMAP4_SSL("imap.gmail.com")
@@ -43,10 +44,13 @@ class EmailReader:
         result = []
         for decoded_part, charset in decoded_header:
             if isinstance(decoded_part, bytes):
-                if charset:
+                if charset and charset.lower() != 'unknown-8bit':
                     decoded_part = decoded_part.decode(charset)
                 else:
-                    decoded_part = decoded_part.decode()
+                    detected = chardet.detect(decoded_part)
+                    detected_charset = detected.get('encoding', 'utf-8')
+                    decoded_part = decoded_part.decode(detected_charset, errors='replace')
+                    result.append(decoded_part)
             result.append(decoded_part)
         return ''.join(result)
 
