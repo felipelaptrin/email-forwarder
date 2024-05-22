@@ -13,12 +13,13 @@ def lambda_handler(event, context):
     print(f"Event ==> {event}")
     print(f"Context ==> {context}")
 
+    sns = SNS()
     reader = EmailReader(Parameters(**event["parameterStore"]))
     emails = reader.read_emails()
     if emails:
         for email in emails:
-            print("Sending email...")
-            SNS.send_message(email, reader.email)
+            print(f"Sending email ({email})...")
+            sns.send_message(email, reader.email)
         max_id = max(emails, key=lambda email: email.id).id
         reader.update_latest_email_read(int(max_id.decode('ascii')))
 
