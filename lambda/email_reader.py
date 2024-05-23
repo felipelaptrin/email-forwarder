@@ -50,9 +50,9 @@ class EmailReader:
                     detected = chardet.detect(decoded_part)
                     detected_charset = detected.get('encoding', 'utf-8')
                     decoded_part = decoded_part.decode(detected_charset, errors='replace')
-                    result.append(decoded_part)
             result.append(decoded_part)
-        return ''.join(result)
+        to_return = ''.join(result).replace('\n', '').replace('\r', '')
+        return to_return
 
     def read_emails(self) -> List[Email]:
         imap = self.imap

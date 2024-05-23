@@ -11,6 +11,7 @@ class SNS:
     def send_message(self, email: Email, original_email: str) -> None:
         try:
             subject = f"[{email.sender}] {email.title}"[0:self.AWS_MAX_SIZE_SUBJECT]
+            print(f"Final email Subject => {subject}")
             sns.publish(
                 TargetArn=SNS_TOPIC_ARN,
                 Subject=subject,
